@@ -39,9 +39,9 @@ export default function PhotoGrid({ items }: PhotoGridProps) {
           
           {/* Overlay */}
           <div
-            className={`absolute inset-0 bg-black/60 transition-opacity duration-300 flex items-center justify-center ${
-              hoveredId === item.id ? 'opacity-100' : 'opacity-0 md:opacity-0'
-            } sm:opacity-100`}
+            className={`absolute inset-0 bg-black/60 transition-opacity duration-300 flex items-center justify-center opacity-100 md:opacity-0 ${
+              hoveredId === item.id ? 'md:opacity-100' : ''
+            }`}
           >
             <div className="text-center">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-light tracking-wide mb-2">
