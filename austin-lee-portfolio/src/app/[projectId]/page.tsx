@@ -3,12 +3,11 @@
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import { projects } from '@/data/projects';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { use } from 'react';
 
 export default function ProjectDetail({ params }: { params: Promise<{ projectId: string }> }) {
-  const router = useRouter();
   const resolvedParams = use(params);
   const currentIndex = projects.findIndex(p => p.id === resolvedParams.projectId);
   const project = projects[currentIndex];
@@ -55,7 +54,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
               </p>
               
               <p>
-                Over four days at Spa, the work didn't chase the cars—it watched what they passed by. It saw what was left behind. The quiet moments. The pressure before release. The humans beneath the helmets.
+                Over four days at Spa, the work didn&apos;t chase the cars—it watched what they passed by. It saw what was left behind. The quiet moments. The pressure before release. The humans beneath the helmets.
               </p>
               
               <p>
