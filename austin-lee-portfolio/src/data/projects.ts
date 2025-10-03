@@ -6,7 +6,10 @@ export interface Project {
   imageAlt: string;
   link?: string;
   category: 'film' | 'stills';
+  images?: string[]; // Array of image URLs for the project detail page
 }
+
+const sampleImages = Array(12).fill('https://res.cloudinary.com/djpmslpgu/image/upload/v1759512465/vagabond_1_bbn8j7.jpg');
 
 export const projects: Project[] = [
   {
@@ -16,7 +19,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Blink Twice',
     category: 'film',
-    link: '#'
+    link: '/blink-twice',
+    images: sampleImages
   },
   {
     id: 'neon-nights',
@@ -25,7 +29,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Neon Nights',
     category: 'stills',
-    link: '#'
+    link: '/neon-nights',
+    images: sampleImages
   },
   {
     id: 'desert-light',
@@ -34,7 +39,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Desert Light',
     category: 'stills',
-    link: '#'
+    link: '/desert-light',
+    images: sampleImages
   },
   {
     id: 'monaco-grand-prix',
@@ -43,7 +49,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Monaco Grand Prix',
     category: 'stills',
-    link: '#'
+    link: '/monaco-grand-prix',
+    images: sampleImages
   },
   {
     id: 'mclaren-racing',
@@ -52,7 +59,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'McLaren Racing',
     category: 'stills',
-    link: '#'
+    link: '/mclaren-racing',
+    images: sampleImages
   },
   {
     id: 'cellar-stories',
@@ -61,7 +69,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Cellar Stories',
     category: 'stills',
-    link: '#'
+    link: '/cellar-stories',
+    images: sampleImages
   },
   {
     id: 'golden-hour',
@@ -70,7 +79,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Golden Hour',
     category: 'stills',
-    link: '#'
+    link: '/golden-hour',
+    images: sampleImages
   },
   {
     id: 'stage-lights',
@@ -79,7 +89,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Stage Lights',
     category: 'film',
-    link: '#'
+    link: '/stage-lights',
+    images: sampleImages
   },
   {
     id: 'mountain-trails',
@@ -88,7 +99,8 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Mountain Trails',
     category: 'stills',
-    link: '#'
+    link: '/mountain-trails',
+    images: sampleImages
   },
   {
     id: 'urban-portraits',
@@ -97,6 +109,7 @@ export const projects: Project[] = [
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1759512482/vagabond_2_vo8j2l.jpg',
     imageAlt: 'Urban Portraits',
     category: 'stills',
-    link: '#'
+    link: '/urban-portraits',
+    images: sampleImages
   }
 ];
