@@ -5,10 +5,12 @@ import Image from 'next/image';
 import { projects } from '@/data/projects';
 import { notFound, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { use } from 'react';
 
-export default function ProjectDetail({ params }: { params: { projectId: string } }) {
+export default function ProjectDetail({ params }: { params: Promise<{ projectId: string }> }) {
   const router = useRouter();
-  const currentIndex = projects.findIndex(p => p.id === params.projectId);
+  const resolvedParams = use(params);
+  const currentIndex = projects.findIndex(p => p.id === resolvedParams.projectId);
   const project = projects[currentIndex];
 
   if (!project || !project.images) {
