@@ -88,6 +88,9 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
                   height={400}
                   className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                   sizes="(max-width: 768px) 50vw, 600px"
+                  loading={index < 4 ? "eager" : "lazy"}
+                  priority={index < 2}
+                  quality={85}
                 />
               </div>
             ))}
