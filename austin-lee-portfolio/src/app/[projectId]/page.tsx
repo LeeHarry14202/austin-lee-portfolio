@@ -35,9 +35,32 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
         {/* Text Content - Top on mobile, Left sidebar (sticky) on desktop */}
         <div className="md:w-72 md:flex-shrink-0 md:pr-8 mb-8 md:mb-0">
           <div className="md:sticky md:top-40">
-            <h1 className="text-3xl md:text-4xl font-light mb-6 md:mb-8 text-center">
-              {project.title}
-            </h1>
+            {/* Title with navigation arrows on mobile */}
+            <div className="relative flex items-center justify-center mb-6 md:mb-8">
+              {/* Left Arrow - Mobile only */}
+              <Link
+                href={`/${prevProject.id}`}
+                className="absolute left-0 md:hidden w-10 h-10 flex items-center justify-center hover:opacity-60 transition-opacity z-40"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </Link>
+              
+              <h1 className="text-3xl md:text-4xl font-light text-center">
+                {project.title}
+              </h1>
+              
+              {/* Right Arrow - Mobile only */}
+              <Link
+                href={`/${nextProject.id}`}
+                className="absolute right-0 md:hidden w-10 h-10 flex items-center justify-center hover:opacity-60 transition-opacity z-40"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </Link>
+            </div>
             
             <div className="space-y-4 text-sm leading-relaxed text-gray-300 mb-6 md:mb-8">
               <p>
@@ -98,13 +121,13 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
         </div>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Desktop only */}
       {/* Left Arrow */}
       <Link
         href={`/${prevProject.id}`}
-        className="fixed top-32 md:top-1/2 md:-translate-y-1/2 left-6 md:left-16 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center hover:opacity-60 transition-opacity z-40"
+        className="hidden md:flex fixed top-1/2 -translate-y-1/2 left-16 w-16 h-16 items-center justify-center hover:opacity-60 transition-opacity z-40"
       >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="md:w-12 md:h-12">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </Link>
@@ -112,9 +135,9 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
       {/* Right Arrow */}
       <Link
         href={`/${nextProject.id}`}
-        className="fixed top-32 md:top-1/2 md:-translate-y-1/2 right-6 md:right-16 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center hover:opacity-60 transition-opacity z-40"
+        className="hidden md:flex fixed top-1/2 -translate-y-1/2 right-16 w-16 h-16 items-center justify-center hover:opacity-60 transition-opacity z-40"
       >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="md:w-12 md:h-12">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M9 18l6-6-6-6" />
         </svg>
       </Link>
