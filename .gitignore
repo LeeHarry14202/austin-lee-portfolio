@@ -1,0 +1,3 @@
+# Ignore upload_data directory
+upload_data/
+description.csv

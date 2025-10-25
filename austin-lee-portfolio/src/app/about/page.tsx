@@ -28,7 +28,7 @@ export default function About() {
         <div className="max-w-md mx-auto" style={{ paddingLeft: '1rem', paddingRight: '1rem', marginBottom: '1rem' }}>
           <div className="relative aspect-[3/4] w-full">
             <Image
-              src="https://res.cloudinary.com/djpmslpgu/image/upload/v1759590503/austin_lee_potrait_bzwknb.png"
+              src="https://res.cloudinary.com/djpmslpgu/image/upload/v1761406291/aboutme_fjdgko.jpg"
               alt="Austin Lee"
               fill
               className="object-cover"
@@ -77,7 +77,7 @@ export default function About() {
            <div style={{ marginBottom: '1rem' }}>
              <div className="relative aspect-[3/4] w-full mx-auto">
               <Image
-                src="https://res.cloudinary.com/djpmslpgu/image/upload/v1759590503/austin_lee_potrait_bzwknb.png"
+                src="https://res.cloudinary.com/djpmslpgu/image/upload/v1761406291/aboutme_fjdgko.jpg"
                 alt="Austin Lee"
                 fill
                 className="object-cover"

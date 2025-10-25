@@ -7,7 +7,8 @@ import io
 # Configuration
 CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djpmslpgu/image/upload"
 UPLOAD_PRESET = "upload-austin-lee-portfolio"
-IMAGE_FOLDER = "/Users/thanhle/Downloads/IMAGE"
+IMAGE_FOLDER = "about"
+# IMAGE_FOLDER = "upload_data"
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB in bytes
 
 def compress_image(image_path, max_size=MAX_FILE_SIZE, quality=85):
@@ -83,20 +84,21 @@ def upload_image(image_path):
         return False, None
 
 def upload_multiple_images(folder_path):
-    """Upload all images from the specified folder"""
+    """Upload all images from the specified folder and its subfolders"""
     # Supported image extensions
     image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.tiff'}
-    
+
     folder = Path(folder_path)
     if not folder.exists():
         print(f"Error: Folder {folder_path} does not exist!")
         return
-    
-    # Get all image files
-    image_files = [
-        f for f in folder.iterdir() 
-        if f.is_file() and f.suffix.lower() in image_extensions
-    ]
+
+    # Get all image files recursively
+    image_files = []
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if Path(file).suffix.lower() in image_extensions:
+                image_files.append(Path(root) / file)
     
     if not image_files:
         print(f"No image files found in {folder_path}")

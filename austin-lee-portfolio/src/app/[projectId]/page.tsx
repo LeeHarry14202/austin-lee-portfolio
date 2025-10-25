@@ -3,12 +3,91 @@
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import { projects } from '@/data/projects';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { use } from 'react';
+import { use, useState, useEffect } from 'react';
+
+// Image Skeleton Component
+function ImageSkeleton() {
+  return (
+    <div className="w-full h-48 bg-gray-700 animate-pulse rounded-lg"></div>
+  );
+}
+
+// Optimized Image Component with Loading State
+function OptimizedImage({
+  src,
+  alt,
+  index
+}: {
+  src: string;
+  alt: string;
+  index: number;
+}) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  // Smart loading strategy based on image position - ưu tiên load ảnh đầu trong mosaic
+  const getLoadingStrategy = () => {
+    if (index < 8) return "eager"; // Load first 8 images eagerly for mosaic view
+    return "lazy";
+  };
+
+  const getPriority = () => {
+    return index < 6; // High priority for first 6 images in mosaic
+  };
+
+  // Preload ảnh đầu tiên ngay lập tức
+  useEffect(() => {
+    if (index === 0) {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => {
+        setIsLoading(false);
+      };
+      img.onerror = () => {
+        setHasError(true);
+        setIsLoading(false);
+      };
+    }
+  }, [index, src]);
+
+  return (
+    <>
+      {isLoading && <ImageSkeleton />}
+      {!hasError ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={400}
+          height={300}
+          className={`w-full h-auto object-contain transition-all duration-300 group-hover:scale-[1.02] rounded-lg ${
+            isLoading ? 'opacity-0' : 'opacity-100'
+          }`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1536px) 33vw, 25vw"
+          loading={getLoadingStrategy()}
+          priority={getPriority()}
+          quality={85}
+          onLoad={() => setIsLoading(false)}
+          onError={() => {
+            setIsLoading(false);
+            setHasError(true);
+          }}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+IRjWjBqO6O2mhP//Z"
+        />
+      ) : (
+        <div className="w-full h-48 bg-gray-800 flex items-center justify-center text-gray-500 text-sm rounded-lg">
+          Failed to load image
+        </div>
+      )}
+    </>
+  );
+}
 
 export default function ProjectDetail({ params }: { params: Promise<{ projectId: string }> }) {
   const resolvedParams = use(params);
+  const router = useRouter();
   const currentIndex = projects.findIndex(p => p.id === resolvedParams.projectId);
   const project = projects[currentIndex];
 
@@ -18,17 +97,41 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
 
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : projects[projects.length - 1];
   const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : projects[0];
-  
+
   if (!prevProject || !nextProject) {
     notFound();
   }
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        router.push(`/${prevProject.id}`);
+      } else if (event.key === 'ArrowRight') {
+        router.push(`/${nextProject.id}`);
+      } else if (event.key === 'Escape') {
+        router.push('/');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [prevProject.id, nextProject.id, router]);
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Navigation />
-      
-      {/* Spacer */}
-      <div style={{ height: '128px' }} />
+    <>
+      {/* Preload ảnh đầu tiên để tối ưu loading */}
+      <link
+        rel="preload"
+        as="image"
+        href={project.images![0]}
+        fetchPriority="high"
+      />
+      <div className="min-h-screen bg-black text-white">
+        <Navigation />
+
+        {/* Spacer */}
+        <div style={{ height: '128px' }} />
       
       {/* Mobile: Vertical layout, Desktop: Horizontal layout */}
       <div className="md:flex px-6 md:px-16 py-8 md:gap-12">
@@ -63,26 +166,8 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
             </div>
             
             <div className="space-y-4 text-sm leading-relaxed text-gray-300 mb-6 md:mb-8">
-              <p>
-              </p>
-              
-              <p>
-              </p>
-              
-              <p className="italic">
-
-              </p>
-              
-              <p>
-              </p>
-              
-              <p>
-              </p>
-              
-              <p>
-              </p>
-              
-              <p>
+              <p className="text-white font-medium text-base mb-4">
+                {project.description}
               </p>
             </div>
             
@@ -96,24 +181,19 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
           </div>
         </div>
 
-        {/* Photo Grid - Below text on mobile, Right side on desktop */}
-        <div className="flex-1 max-w-5xl">
-          <div className="grid grid-cols-2 gap-4">
+        {/* Masonry View - Below text on mobile, Right side on desktop */}
+        <div className="flex-1 max-w-6xl">
+          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4">
             {project.images.map((image, index) => (
               <div
                 key={index}
-                className="relative w-full overflow-hidden group"
+                className="relative overflow-hidden break-inside-avoid bg-gray-900 rounded-lg"
+                style={{ marginTop: '24px', marginBottom: '24px' }}
               >
-                <Image
+                <OptimizedImage
                   src={image}
                   alt={`${project.title} - Image ${index + 1}`}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                  sizes="(max-width: 768px) 50vw, 600px"
-                  loading={index < 4 ? "eager" : "lazy"}
-                  priority={index < 2}
-                  quality={85}
+                  index={index}
                 />
               </div>
             ))}
@@ -141,6 +221,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
           <path d="M9 18l6-6-6-6" />
         </svg>
       </Link>
-    </div>
+      </div>
+    </>
   );
 }
