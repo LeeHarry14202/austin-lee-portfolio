@@ -33,7 +33,7 @@ export default function Navigation() {
               </li>
               <li>
                 <Link href="/about" className="hover:opacity-60 transition-opacity">
-                  WHO IS AUSTIN LEE?
+                  ABOUT
                 </Link>
               </li>
             </ul>
@@ -43,7 +43,7 @@ export default function Navigation() {
             
             {/* Right side - Name (Desktop) */}
             <Link href="/" className="text-lg md:text-xl font-bold tracking-widest hidden md:block">
-              AUSTIN LEE
+              AUSTIN LE
             </Link>
 
             {/* Mobile Menu Button */}
@@ -73,7 +73,7 @@ export default function Navigation() {
         {/* Centered name - Mobile only */}
         {!isMenuOpen && (
           <Link href="/" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold tracking-widest md:hidden">
-            AUSTIN LEE
+            AUSTIN LE
           </Link>
         )}
       </nav>
@@ -126,7 +126,7 @@ export default function Navigation() {
                 onClick={() => setIsMenuOpen(false)} 
                 className="block hover:opacity-60 transition-opacity whitespace-nowrap"
               >
-                WHO IS AUSTIN LEE?
+                ABOUT
               </Link>
             </li>
           </ul>

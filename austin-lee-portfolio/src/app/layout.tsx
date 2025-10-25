@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Austin Lee - Photographer",
+  title: "Austin Le - Photographer",
   description: "Photography portfolio showcasing visual stories and creative work",
 };
 

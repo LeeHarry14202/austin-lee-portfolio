@@ -29,7 +29,7 @@ export default function About() {
           <div className="relative aspect-[3/4] w-full">
             <Image
               src="https://res.cloudinary.com/djpmslpgu/image/upload/v1761406291/aboutme_fjdgko.jpg"
-              alt="Austin Lee"
+              alt="Austin Le"
               fill
               className="object-cover"
               priority
@@ -78,7 +78,7 @@ export default function About() {
              <div className="relative aspect-[3/4] w-full mx-auto">
               <Image
                 src="https://res.cloudinary.com/djpmslpgu/image/upload/v1761406291/aboutme_fjdgko.jpg"
-                alt="Austin Lee"
+                alt="Austin Le"
                 fill
                 className="object-cover"
                 priority
