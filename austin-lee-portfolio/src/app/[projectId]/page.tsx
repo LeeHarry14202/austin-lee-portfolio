@@ -93,7 +93,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
 
   // State for mobile navigation visibility
   const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollTimer, setScrollTimer] = useState<NodeJS.Timeout | null>(null);
 
   if (!project || !project.images || !Array.isArray(project.images) || project.images.length === 0) {
     notFound();
@@ -130,23 +130,30 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
   // Mobile navigation hide/show on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      // Hide buttons immediately when scrolling starts
+      setIsNavVisible(false);
 
-      // Show buttons when scrolling up or at top
-      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+      // Clear existing timer
+      if (scrollTimer) {
+        clearTimeout(scrollTimer);
+      }
+
+      // Set timer to show buttons after scrolling stops (500ms delay)
+      const timer = setTimeout(() => {
         setIsNavVisible(true);
-      }
-      // Hide buttons when scrolling down
-      else if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setIsNavVisible(false);
-      }
+      }, 300);
 
-      setLastScrollY(currentScrollY);
+      setScrollTimer(timer);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimer) {
+        clearTimeout(scrollTimer);
+      }
+    };
+  }, [scrollTimer]);
 
   return (
     <>
