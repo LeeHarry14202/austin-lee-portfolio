@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Austin Le - Photographer",
     description: "Photography portfolio showcasing visual stories and creative work",
-    images: ["https://res.cloudinary.com/djpmslpgu/image/upload/v1761454315/aboutmesocial_uww3u1.png"],
+    images: ["https://res.cloudinary.com/djpmslpgu/image/upload/w_1200,h_630,c_pad,b_black,f_auto/v1761454315/aboutmesocial_uww3u1.jpg"],
   },
 };
 
