@@ -91,6 +91,10 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
   const currentIndex = projects.findIndex(p => p.id === resolvedParams.projectId);
   const project = projects[currentIndex];
 
+  // State for mobile navigation visibility
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   if (!project || !project.images || !Array.isArray(project.images) || project.images.length === 0) {
     notFound();
   }
@@ -123,6 +127,27 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [prevProject.id, nextProject.id, router]);
 
+  // Mobile navigation hide/show on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Show buttons when scrolling up or at top
+      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+        setIsNavVisible(true);
+      }
+      // Hide buttons when scrolling down
+      else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsNavVisible(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
     <>
       {/* Preload ảnh đầu tiên để tối ưu loading */}
@@ -139,7 +164,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
         <div style={{ height: '64px' }} />
       
       {/* Mobile: Vertical layout, Desktop: Horizontal layout */}
-      <div className="md:flex px-6 md:px-16 py-8 md:gap-12">
+      <div className="md:flex md:px-16 py-8 md:gap-12">
         {/* Text Content - Top on mobile, Left sidebar (sticky) on desktop */}
         <div className="md:w-72 md:flex-shrink-0 md:pr-8 mb-8 md:mb-0">
           <div className="md:sticky md:top-40">
@@ -148,39 +173,68 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
               {/* Left Arrow - Mobile only */}
               <Link
                 href={`/${prevProject.id}`}
-                className="absolute left-0 md:hidden w-10 h-10 flex items-center justify-center hover:opacity-60 transition-opacity z-40"
+                className={`fixed left-4 top-1/2 -translate-y-1/2 md:hidden w-12 h-12 bg-white/1 backdrop-blur-xl rounded-full flex items-center justify-center hover:opacity-60 transition-all duration-300 z-40 ${
+                  isNavVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
+                }`}
               >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </Link>
               
-              <h1 className="text-3xl md:text-4xl font-light text-center">
+              <h1 className="text-3xl md:text-4xl font-light text-center md:hidden" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+                {project.title}
+              </h1>
+              <h1 className="hidden md:block text-3xl md:text-4xl font-light text-center">
                 {project.title}
               </h1>
               
               {/* Right Arrow - Mobile only */}
               <Link
                 href={`/${nextProject.id}`}
-                className="absolute right-0 md:hidden w-10 h-10 flex items-center justify-center hover:opacity-60 transition-opacity z-40"
+                className={`fixed right-4 top-1/2 -translate-y-1/2 md:hidden w-12 h-12 bg-white/1 backdrop-blur-xl rounded-full flex items-center justify-center hover:opacity-60 transition-all duration-300 z-40 ${
+                  isNavVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
+                }`}
               >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </Link>
             </div>
             
-            <div className="space-y-4 text-sm leading-relaxed text-gray-300 mb-6 md:mb-8">
-              <p className="text-white font-medium text-base mb-4">
+            <div className="space-y-4 text-sm leading-relaxed text-gray-300 mb-6 md:mb-8 md:hidden">
+              <div className="text-white font-medium text-base mb-4 whitespace-pre-line" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
                 {project.description}
-              </p>
+              </div>
+            </div>
+            <div className="hidden md:block space-y-4 text-sm leading-relaxed text-gray-300 mb-6 md:mb-8">
+              <div className="text-white font-medium text-base mb-4 whitespace-pre-line">
+                {project.description}
+              </div>
             </div>
             
           </div>
         </div>
 
         {/* Masonry View - Below text on mobile, Right side on desktop */}
-        <div className="flex-1 max-w-6xl">
+        <div className="flex-1 max-w-6xl md:hidden" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4">
+            {project.images.map((image, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden break-inside-avoid bg-gray-900 rounded-lg group"
+                style={{ marginTop: '24px', marginBottom: '24px' }}
+              >
+                <OptimizedImage
+                  src={image}
+                  alt={`${project.title} - Image ${index + 1}`}
+                  index={index}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="hidden md:flex flex-1 max-w-6xl">
           <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4">
             {project.images.map((image, index) => (
               <div
@@ -200,7 +254,8 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
       </div>
 
       {/* Navigation Arrows - Desktop only */}
-      {/* Left Arrow */}
+      {/* Left Arrow - Hidden */}
+      {/*
       <Link
         href={`/${prevProject.id}`}
         className="hidden md:flex fixed top-1/2 -translate-y-1/2 left-16 w-16 h-16 items-center justify-center hover:opacity-60 transition-opacity z-40"
@@ -209,7 +264,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </Link>
-      
+      */}
       {/* Right Arrow */}
       <Link
         href={`/${nextProject.id}`}

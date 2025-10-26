@@ -15,7 +15,7 @@ export const projects: Project[] = [
   {
     id: 'hansie-lifestyle',
     title: 'Hansie Lifestyle Campaign',
-    description: ``,
+    description: `A campaign built around Hansie’s latest drop—celebrating community, sport, daily life, and Australian roots. I led creative direction, production, and photography to craft a visual identity that's both nostalgic and fresh—capturing the feeling of being part of something bigger.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761402420/hansie_lifestyle_campaign_007_s3jrqs.jpg',
     imageAlt: 'Hansie Lifestyle Campaign',
     category: 'stills',
@@ -43,7 +43,7 @@ export const projects: Project[] = [
   {
     id: 'pistol-ac-pierre',
     title: 'Pierre x Pistol',
-    description: ``,
+    description: `Directed, shot, and edited the 2025 Pistol Raw Denim Tote Bag launch.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761402485/pistol_ac_x_pierre_006_zpygyv.jpg',
     imageAlt: 'Pierre x Pistol Collaboration',
     category: 'stills',
@@ -64,7 +64,7 @@ export const projects: Project[] = [
   {
     id: 'wombi-campaign',
     title: 'Wombi Campaign',
-    description: ``,
+    description: `Directed, shot, and edited a campaign photoshoot for Wombi, showcasing its versatility and comfort across everyday settings. The shoot captured warmth, ease, and functionality in a natural, relaxed style.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761403476/wombi_campaign_026_kjhuce.jpg',
     imageAlt: 'Wombi Brand Campaign',
     category: 'stills',
@@ -113,7 +113,11 @@ export const projects: Project[] = [
   {
     id: 'football-culture',
     title: 'Football Culture Editorial',
-    description: ``,
+    description: `An editorial on Zan Nguyen, a Vietnamese-American footballer for Ho Chi Minh City FC.
+
+Exploring the intersection of fashion, culture, and football, the series follows Zan through Saigon's markets and alleys—where sport meets street, and identity finds rhythm.
+
+Directed and photographed by me, with video by Elliot Banks.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761403315/football_culture_012_ghi04o.jpg',
     imageAlt: 'Football Culture Editorial',
     category: 'stills',
@@ -145,7 +149,7 @@ export const projects: Project[] = [
   {
     id: 'pierre-hansie',
     title: 'Pierre x Hansie Polo Shirt',
-    description: ``,
+    description: `Directed, shot, and edited the 2025 polo t-shirt launch for Hansie.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761402537/pierre_x_hansie_003_gmcq9u.jpg',
     imageAlt: 'Pierre x Hansie Polo Shirt Launch',
     category: 'stills',
@@ -165,7 +169,9 @@ export const projects: Project[] = [
   {
     id: 'on-pitch-fashion',
     title: 'Off-Pitch Fashion Editorial',
-    description: ``,
+    description: `Vintage football shirts evoke memories of legendary matches, iconic players, and unforgettable football moments. Wearing an old-school football shirt isn't just about supporting a team—it's about connecting with football history and showcasing unique designs from the past. I led the creative direction, production, and photography, creating a photoshoot that feels both nostalgic and new.
+
+This nostalgia isn't limited to football fans. Pop culture has played a massive role in bringing retro football jerseys into mainstream fashion. It's more than just a shirt; it's a bridge between eras, between the global game and personal identity.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761402368/on_pitch_fashion_001_ynh3xq.jpg',
     imageAlt: 'Off-Pitch Fashion Editorial',
     category: 'stills',
@@ -187,7 +193,7 @@ export const projects: Project[] = [
   {
     id: 'mg7-duy-anh',
     title: 'Duy Anh x MG7',
-    description: ``,
+    description: `In collaboration with Morris Garages, me and Thang Tran (@thgtrann) produced a short road trip around Ho Chi Minh, shot on Canon and 35mm Film (2025)`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761403333/mg7_duy_anh_005_bbaqtm.jpg',
     imageAlt: 'Duy Anh x MG7 Collaboration',
     category: 'film',
@@ -215,7 +221,7 @@ export const projects: Project[] = [
   {
     id: 'mg7-campaign',
     title: 'MG7 Campaign',
-    description: ``,
+    description: `In collaboration with Morris Garages, me and Thang Tran (@thgtrann) produced a short road trip around Ho Chi Minh, shot on Canon and 35mm Film (2025)`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761403374/mg7_campaign_006_qitj3i.jpg',
     imageAlt: 'MG7 Campaign',
     category: 'stills',
@@ -235,7 +241,7 @@ export const projects: Project[] = [
   {
     id: 'karina-kotlarova',
     title: 'Karina Kotlarova',
-    description: ``,
+    description: `35mm Portraits of Karina Kotlarova.`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761402155/karina_kotlarova_001_e7lvfn.jpg',
     imageAlt: 'Karina Kotlarova Portraits',
     category: 'stills',
@@ -255,7 +261,9 @@ export const projects: Project[] = [
   {
     id: 'in-the-mood-for-love',
     title: 'In the Mood For Love',
-    description: ``,
+    description: `This project inspired by 50s–70s vintage clothing and shot entirely on black and white 35mm film, this photo series captures portraits of a couple in their kitchen.
+
+Models: TOM SIMON (@tom___simon) & KASIA NAKAGAWA (@kasia.nakagawa)`,
     imageSrc: 'https://res.cloudinary.com/djpmslpgu/image/upload/v1761402120/in_the_mood_for_love_006_s8pbxv.jpg',
     imageAlt: 'In the Mood For Love Photography Series',
     category: 'stills',

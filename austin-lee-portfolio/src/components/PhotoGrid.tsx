@@ -20,12 +20,13 @@ export default function PhotoGrid({ items }: PhotoGridProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0">
-      {items.map((item) => (
-        <ScrollAwareLink
-          key={item.id}
-          href={item.link || '#'}
-          className="relative aspect-square overflow-hidden group"
+    <div className="md:px-16 py-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+        {items.map((item) => (
+          <ScrollAwareLink
+            key={item.id}
+            href={item.link || '#'}
+            className="relative aspect-square overflow-hidden group rounded-lg"
           onMouseEnter={() => setHoveredId(item.id)}
           onMouseLeave={() => setHoveredId(null)}
         >
@@ -54,6 +55,7 @@ export default function PhotoGrid({ items }: PhotoGridProps) {
           </div>
         </ScrollAwareLink>
       ))}
+      </div>
     </div>
   );
 }
