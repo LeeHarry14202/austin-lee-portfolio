@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
+import { ScrollAwareLink } from '@/components/ScrollAwareLink';
 
 interface PhotoGridItem {
   id: string;
@@ -22,7 +22,7 @@ export default function PhotoGrid({ items }: PhotoGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0">
       {items.map((item) => (
-        <Link
+        <ScrollAwareLink
           key={item.id}
           href={item.link || '#'}
           className="relative aspect-square overflow-hidden group"
@@ -52,7 +52,7 @@ export default function PhotoGrid({ items }: PhotoGridProps) {
               </p>
             </div>
           </div>
-        </Link>
+        </ScrollAwareLink>
       ))}
     </div>
   );

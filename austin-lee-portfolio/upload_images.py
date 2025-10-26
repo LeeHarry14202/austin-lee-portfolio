@@ -7,7 +7,7 @@ import io
 # Configuration
 CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djpmslpgu/image/upload"
 UPLOAD_PRESET = "upload-austin-lee-portfolio"
-IMAGE_FOLDER = "about"
+IMAGE_FOLDER = "upload_data/in_the_mood_for_love"
 # IMAGE_FOLDER = "upload_data"
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB in bytes
 

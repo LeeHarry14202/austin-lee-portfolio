@@ -61,7 +61,7 @@ function OptimizedImage({
           alt={alt}
           width={400}
           height={300}
-          className={`w-full h-auto object-contain transition-all duration-300 group-hover:scale-[1.02] rounded-lg ${
+          className={`w-full h-auto object-contain transition-all duration-300 hover:scale-105 rounded-lg cursor-pointer ${
             isLoading ? 'opacity-0' : 'opacity-100'
           }`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1536px) 33vw, 25vw"
@@ -102,6 +102,11 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
     notFound();
   }
 
+  // Reset scroll position to top immediately on page load
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [resolvedParams.projectId]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -131,7 +136,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
         <Navigation />
 
         {/* Spacer */}
-        <div style={{ height: '128px' }} />
+        <div style={{ height: '64px' }} />
       
       {/* Mobile: Vertical layout, Desktop: Horizontal layout */}
       <div className="md:flex px-6 md:px-16 py-8 md:gap-12">
@@ -171,13 +176,6 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
               </p>
             </div>
             
-            <button className="flex items-center gap-2 text-sm hover:opacity-60 transition-opacity mb-8 md:mb-0">
-              <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-black">
-                  <path d="M8 3L3 8M3 3h5v5" stroke="currentColor" strokeWidth="1.5"/>
-                </svg>
-              </span>
-            </button>
           </div>
         </div>
 
@@ -187,7 +185,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ projectId:
             {project.images.map((image, index) => (
               <div
                 key={index}
-                className="relative overflow-hidden break-inside-avoid bg-gray-900 rounded-lg"
+                className="relative overflow-hidden break-inside-avoid bg-gray-900 rounded-lg group"
                 style={{ marginTop: '24px', marginBottom: '24px' }}
               >
                 <OptimizedImage

@@ -7,12 +7,12 @@ export default function About() {
       <Navigation />
       
       {/* Spacer */}
-      <div style={{ height: '128px' }} />
+      <div style={{ height: '64px' }} />
       
       {/* Mobile Layout: Title -> Email -> Photo -> Description */}
       <main className="md:hidden py-8">
         {/* Title */}
-        <h1 className="text-base sm:text-xl font-light tracking-widest text-center whitespace-nowrap" style={{ paddingLeft: '1rem', paddingRight: '1rem', marginBottom: '1rem' }}>
+        <h1 className="text-xs sm:text-sm md:text-base lg:text-lg font-light tracking-widest text-center leading-tight break-words" style={{ paddingLeft: '1rem', paddingRight: '1rem', marginBottom: '1rem' }}>
           PHOTOGRAPHER | DESIGNER | STORYTELLER
         </h1>
         
@@ -58,9 +58,11 @@ export default function About() {
         <div className="max-w-4xl">
           {/* Title */}
           <div style={{ marginBottom: '1rem' }}>
-            <h1 className="text-4xl font-bold tracking-widest text-left whitespace-nowrap">
-              <span className="font-bold">PHOTOGRAPHER | DESIGNER | STORYTELLER</span>
-            </h1>
+            <div className="w-full mx-auto">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-widest text-left leading-tight break-words xl:whitespace-nowrap">
+                <span className="font-bold">PHOTOGRAPHER | DESIGNER | STORYTELLER</span>
+              </h1>
+            </div>
           </div>
 
           {/* Email */}

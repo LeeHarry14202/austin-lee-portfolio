@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { clearScrollPosition } = useScrollPosition();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,16 +20,20 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 ${
         isScrolled ? 'bg-black/60 backdrop-blur-md' : 'bg-black/90 backdrop-blur-sm'
       }`}>
         <div className="w-full relative" style={{ paddingLeft: '64px', paddingRight: '48px' }}>
           {/* Desktop & Mobile Header */}
-          <div className="h-32 flex items-center justify-between">
+          <div className="h-16 flex items-center justify-between">
             {/* Left Navigation - Desktop only */}
             <ul className="hidden md:flex items-center gap-8 text-sm tracking-wider">
               <li>
-                <Link href="/" className="hover:opacity-60 transition-opacity">
+                <Link 
+                  href="/" 
+                  className="hover:opacity-60 transition-opacity"
+                  onClick={clearScrollPosition}
+                >
                   WORK
                 </Link>
               </li>
@@ -38,17 +44,32 @@ export default function Navigation() {
               </li>
             </ul>
             
-            {/* Spacer for mobile */}
-            <div className="md:flex-1"></div>
+            {/* Centered name - Mobile only */}
+            {!isMenuOpen && (
+              <Link 
+                href="/" 
+                className="flex-1 text-center text-lg font-bold tracking-widest md:hidden"
+                onClick={clearScrollPosition}
+              >
+                AUSTIN LE
+              </Link>
+            )}
+            
+            {/* Spacer for mobile when menu is open */}
+            {isMenuOpen && <div className="flex-1 md:hidden"></div>}
             
             {/* Right side - Name (Desktop) */}
-            <Link href="/" className="text-lg md:text-xl font-bold tracking-widest hidden md:block">
+            <Link 
+              href="/" 
+              className="text-lg md:text-xl font-bold tracking-widest hidden md:block"
+              onClick={clearScrollPosition}
+            >
               AUSTIN LE
             </Link>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden absolute right-6 top-1/2 -translate-y-1/2 z-[60]"
+              className="md:hidden z-[60] absolute right-6 top-1/2 -translate-y-1/2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -69,13 +90,6 @@ export default function Navigation() {
             </button>
           </div>
         </div>
-        
-        {/* Centered name - Mobile only */}
-        {!isMenuOpen && (
-          <Link href="/" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold tracking-widest md:hidden">
-            AUSTIN LE
-          </Link>
-        )}
       </nav>
 
       {/* Full Screen Menu Overlay - Mobile only */}
@@ -87,7 +101,7 @@ export default function Navigation() {
         {/* Close Button - Same exact position as menu button */}
         <div className="fixed top-0 left-0 right-0">
           <div className="w-full relative" style={{ paddingLeft: '64px', paddingRight: '48px' }}>
-            <div className="h-32 flex items-center justify-between">
+            <div className="h-16 flex items-center justify-between">
               <div></div>
               <button
                 className="absolute right-6 top-1/2 -translate-y-1/2"
@@ -114,7 +128,10 @@ export default function Navigation() {
             <li>
               <Link 
                 href="/" 
-                onClick={() => setIsMenuOpen(false)} 
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  clearScrollPosition();
+                }} 
                 className="block hover:opacity-60 transition-opacity whitespace-nowrap"
               >
                 WORK
