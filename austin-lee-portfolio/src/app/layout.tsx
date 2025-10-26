@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Austin Le - Photographer",
     description: "Photography portfolio showcasing visual stories and creative work",
-    url: "https://austinle-portfolio.vercel.app",
+    url: "https://www.austinle.com/",
     siteName: "Austin Le Photography",
     images: [
       {
