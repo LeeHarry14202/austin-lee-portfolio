@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: "Austin Le Photography",
     images: [
       {
-        url: "https://res.cloudinary.com/djpmslpgu/image/upload/w_1200,h_630,c_pad,b_black,f_auto/v1761406291/aboutme_fjdgko.jpg",
+        url: "https://res.cloudinary.com/djpmslpgu/image/upload/v1761454315/aboutmesocial_uww3u1.png",
         width: 1200,
         height: 630,
         alt: "Austin Le Photography Portfolio",
