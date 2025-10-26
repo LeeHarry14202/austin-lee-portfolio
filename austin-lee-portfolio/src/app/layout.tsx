@@ -50,6 +50,28 @@ export const metadata: Metadata = {
     shortcut: "/favicon-32x32.png?v=1",
     apple: "/favicon-32x32.png?v=1",
   },
+  openGraph: {
+    title: "Austin Le - Photographer",
+    description: "Photography portfolio showcasing visual stories and creative work",
+    url: "https://austinle-portfolio.vercel.app",
+    siteName: "Austin Le Photography",
+    images: [
+      {
+        url: "https://res.cloudinary.com/djpmslpgu/image/upload/v1761406291/aboutme_fjdgko.jpg",
+        width: 1200,
+        height: 1600,
+        alt: "Austin Le Photography Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Austin Le - Photographer",
+    description: "Photography portfolio showcasing visual stories and creative work",
+    images: ["https://res.cloudinary.com/djpmslpgu/image/upload/v1761406291/aboutme_fjdgko.jpg"],
+  },
 };
 
 export default function RootLayout({
